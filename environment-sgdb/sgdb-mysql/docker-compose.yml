@@ -1,4 +1,4 @@
-## Environment SGDB
+## Environment MYSQL
 version: '3.8'
 
 services:

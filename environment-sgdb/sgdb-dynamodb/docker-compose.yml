@@ -1,4 +1,4 @@
-## Environment SGDB
+## Environment DYNAMO DB
 version: '3.8'
 
 services:

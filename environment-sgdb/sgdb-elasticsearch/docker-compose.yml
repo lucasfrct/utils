@@ -1,4 +1,4 @@
-## Environment SGDB
+## Environment ELASTIC SEARCH
 version: '3.8'
 
 services:

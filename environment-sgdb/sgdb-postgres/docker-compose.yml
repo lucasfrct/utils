@@ -1,4 +1,4 @@
-## Environment SGDB
+## Environment POSTGRES
 version: '3.8'
 
 services:

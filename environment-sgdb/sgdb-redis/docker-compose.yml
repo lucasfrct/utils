@@ -1,6 +1,5 @@
-## Environment SGDB
+## Environment REDIS
 version: '3.8'
-
 services:
 
   ##################### REDIS #####################
