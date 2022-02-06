@@ -1,0 +1,17 @@
+{
+    "name": "environment-node",
+    "version": "1.0.0",
+    "description": "environment-node",
+    "main": "index.js",
+    "scripts": {
+        "start": "nodemon -L index.js",
+        "dev": "nodemon -L index.js",
+        "development": "nodemon -L index.js"
+    },
+    "author": "lucas costa",
+    "license": "ISC",
+    "dependencies": {
+        "express": "^4.17.2",
+        "nodemon": "^2.0.15"
+    }
+}
