@@ -1,32 +1,31 @@
 ## Environment NODE
-version: "3.9"
+version: "3.8"
 
 services:
 
-  environment-development:
+  environment-node:
     container_name: environment-node
     image: environment-node
     labels:
       environment-node: "environment-node"
     build: .
     volumes:
-      - .:/usr/environment-development
+      - .:/usr/environment-node
     env_file:
       - ./.env
     environment:
       NODE_ENV: development
     command: npm run development
     networks:
-      - development
+      - environment-node
     restart: always
     ports:
       - 3000:3000
 
 volumes:
-  environment-dev:
+  environment-node:
     name: environment-node
-
 networks:
-  development:
-    name: development
+  environment-node:
+    name: environment-node
     driver: bridge
