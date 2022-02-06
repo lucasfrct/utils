@@ -1,0 +1,34 @@
+## Environment SGDB
+version: '3.8'
+
+services:
+
+  ##################### DYNAMODB #####################
+  environment-dynamodb:
+    container_name: environment-dynamodb
+    image: amazon/dynamodb-local:1.18.0
+    labels:
+      environment-dynamodb: "environment-dynamodb"
+    volumes:
+      - ./data:/home/dynamodblocal/data
+    env_file:
+      - ./.env
+    environment:
+      DYNAMODB_USER: development
+    command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
+    networks:
+      environment-dynamodb:
+    restart: always
+    ports:
+      - 8000:8000 # host:container
+
+##################### VOLUMES #####################
+volumes:
+  environment-dynamodb:
+    name: environment-dynamodb
+
+##################### NETWORKS #####################
+networks:
+  environment-dynamodb:
+    name: environment-dynamodb
+    driver: bridge

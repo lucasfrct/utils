@@ -1,0 +1,34 @@
+## Environment SGDB
+version: '3.8'
+
+services:
+  ##################### POSTGRES #####################
+  environment-postgres:
+    container_name: environment-postgres
+    image: postgres:9.6.24
+    labels:
+      environment-postgres: "environment-postgres"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    env_file:
+      - ./.env
+    environment:
+      POSTGRES_DB: development
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: Alterar123
+    networks:
+      environment-postgres:
+    restart: always
+    ports:
+      - "5433:5432" # host:container
+
+##################### VOLUMES #####################
+volumes:
+  environment-postgres:
+    name: environment-postgres
+
+##################### NETWORKS #####################
+networks:
+  environment-postgres:
+    name: environment-postgres
+    driver: bridge

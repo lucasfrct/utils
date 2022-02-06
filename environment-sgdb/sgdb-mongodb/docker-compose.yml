@@ -1,0 +1,33 @@
+## Environment SGDB
+version: '3.8'
+
+services:
+  ##################### MONGODB #####################
+  environment-mongodb:
+    container_name: environment-mongodb
+    image: mongo:5.0.6
+    labels:
+      environment-mongodb: "environment-mongodb"
+    volumes:
+      - ./data:/data/db
+    env_file:
+      - ./.env
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: development
+      MONGO_INITDB_ROOT_PASSWORD: Alterar123
+    networks:
+      environment-mongodb:
+    restart: always
+    ports:
+      - 27017:27017 # host:container
+
+##################### VOLUMES #####################
+volumes:
+  environment-mongodb:
+    name: environment-mongodb
+
+##################### NETWORKS #####################
+networks:
+  environment-mongodb:
+    name: environment-mongodb
+    driver: bridge

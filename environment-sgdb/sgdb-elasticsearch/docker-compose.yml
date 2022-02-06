@@ -1,0 +1,36 @@
+## Environment SGDB
+version: '3.8'
+
+services:
+  ##################### ELASTIC SEARCH #####################
+  environment-elasticsearch:
+    container_name: environment-elasticsearch
+    image: elasticsearch:7.17.0
+    labels:
+      environment-elasticsearch: "environment-elasticsearch"
+    volumes:
+      - ./data:/usr/share/elasticsearch/data
+    env_file:
+      - ./.env
+    environment:
+      - node.name=es01
+      - cluster.name=es-evironment-development
+      - cluster.initial_master_nodes=es01
+      - bootstrap.memory_lock=true
+      - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    networks:
+      environment-elasticsearch:
+    restart: always
+    ports:
+      - 9200:9200 # host:container
+
+##################### VOLUMES #####################
+volumes:
+  environment-elasticsearch:
+    name: environment-elasticsearch
+
+##################### NETWORKS #####################
+networks:
+  environment-elasticsearch:
+    name: environment-elasticsearch
+    driver: bridge
