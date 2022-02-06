@@ -1,26 +1,26 @@
+## GOLANG
+FROM golang:1.17 AS base
 
-## Node alpine
-FROM node:alpine AS environment-development
+FROM base AS dev
 
 ## Variáveis 
-ENV DEVELOPMENT_DIR=/usr/environment-development
-ENV DEVELOPMENT_PORT=3000
+ENV DEVELOPMENT_DIR=/usr/environment-go
+ENV DEVELOPMENT_PORT=5000
 
-## steps não cacheados
-ARG CACHEBUST=3 
-ARG CACHEBUST=4 
+## Baixa o hot reload
+RUN curl -sSfL https://raw.githubusercontent.com/cosmtrek/air/master/install.sh | sh -s -- -b $(go env GOPATH)/bin
 
 ## diretorios de trabalho
 WORKDIR ${DEVELOPMENT_DIR}
 
-## Arquivos de iniciacao par ao node
-COPY package*.json ./
-
-## install dependences
-RUN npm install
+## Atualiza as dependências
+COPY go.mod go.sum ./
+RUN go mod download && go mod verify
 
 ## Copia projeto
 COPY . .
+
+RUN go build -v -o /usr/local/bin/app ./...
 
 ## porta de acesso
 EXPOSE ${DEVELOPMENT_PORT}  
@@ -28,5 +28,4 @@ EXPOSE ${DEVELOPMENT_PORT}
 ## diretorio padrao
 VOLUME ${DEVELOPMENT_DIR}
 
-## start do ambiente
-CMD ["npm", "run", "development"]
+CMD ["air"]

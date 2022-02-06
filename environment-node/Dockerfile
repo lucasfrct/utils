@@ -1,9 +1,8 @@
 
 ## Node alpine
-FROM node:alpine AS environment-development
-
+FROM node:alpine AS environment-node
 ## Variáveis 
-ENV DEVELOPMENT_DIR=/usr/environment-development
+ENV DEVELOPMENT_DIR=/usr/environment-node
 ENV DEVELOPMENT_PORT=3000
 
 ## steps não cacheados
