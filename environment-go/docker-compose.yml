@@ -6,16 +6,15 @@ services:
     labels:
       environment-go: "environment-go"
       name: "environment-go"
-    image: cintosyntax/docker-golang-live-reloading
+    # image: cintosyntax/docker-golang-live-reloading
+    build: .
+    working_dir: /go/src/github.com/environment-go
     volumes:
       - .:/go/src/github.com/environment-go
     env_file: ".env"
     environment:
       GO_ENV: "development"
-      GOPATH: /go
-      GOBIN: /go/bin
-      GOPRIVATE: github.com/environment-go
-    command: bash -c "cd /go/src/github.com/environment-go; gin -i run"
+    command: bash -c "gin -i run"
     networks:
       - environment-go
     restart: always
