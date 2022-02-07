@@ -12,6 +12,9 @@ services:
     env_file: ".env"
     environment:
       GO_ENV: "development"
+      GOPATH: /go
+      GOBIN: /go/bin
+      GOPRIVATE: github.com/environment-go
     command: bash -c "cd /go/src/github.com/environment-go; gin -i run"
     networks:
       - environment-go
