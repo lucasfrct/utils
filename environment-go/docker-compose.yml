@@ -1,19 +1,18 @@
 version: "3.8"
 services:
-  ##################### GO lang #####################
+  ##################### GO #####################
   environment-go:
     container_name: environment-go
     labels:
       environment-go: "environment-go"
       name: "environment-go"
-    build: .
+    image: cintosyntax/docker-golang-live-reloading
     volumes:
-      - .:/usr/environment-go
-    env_file:
-      - ./.env
+      - .:/go/src/github.com/environment-go
+    env_file: ".env"
     environment:
-      GO_ENV: development
-    command: air
+      GO_ENV: "development"
+    command: bash -c "cd /go/src/github.com/environment-go; gin -i run"
     networks:
       - environment-go
     restart: always
