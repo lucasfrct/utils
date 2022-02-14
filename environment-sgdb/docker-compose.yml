@@ -1,49 +1,80 @@
 ## Environment SGDB
-version: '3.8'
+version: '3.9'
 
 services:
 
   ##################### MYSQL #####################
   environment-mysql:
-    profiles: [ "all", "mysql" ]
-    extends:
-      file: ./sgdb-mysql/docker-compose.yml
-      service: environment-mysql
+    profiles: [ "all", "mysql", "sql", relationals ]
+    container_name: environment-mysql
+    build: 
+      context: ./sgdb-mysql
+      dockerfile: Dockerfile
+    labels:
+      environment-mysql: "environment-mysql"
+    volumes:
+      - ./sgdb-mysql/data:/var/lib/mysql
+    env_file:
+      - ./sgdb-mysql/.env
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      environment-mysql:
+    restart: always
+    ports:
+      - 3306:3306 # host:container
 
   ##################### POSTGRES #####################
   environment-postgres:
-    profiles: [ "all", "postgres" ]
-    extends:
-      file: ./sgdb-postgres/docker-compose.yml
-      service: environment-postgres
+    profiles: [ "all", "postgres", "sql", "relationals" ]
+    container_name: environment-postgres
+    build:
+      context: .
+      dockerfile: Dockerfile
+    labels:
+      environment-postgres: "environment-postgres"
+    volumes:
+      - ./sgdb-postgres/data:/var/lib/postgresql/data
+    env_file:
+      - ./sgdb-postgres/.env
+    environment:
+      POSTGRES_DB: development
+      POSTGRES_USER: development
+      POSTGRES_PASSWORD: Alterar123
+    networks:
+      environment-postgres:
+    restart: always
+    ports:
+      - "5432:5432" # host:container
 
-  ##################### DYNAMODB #####################
-  environment-dynamodb:
-    profiles: [ "all", "dynamodb" ]
-    extends:
-      file: ./sgdb-dynamodb/docker-compose.yml
-      service: environment-dynamodb
+  # ##################### DYNAMODB #####################
+  # environment-dynamodb:
+  #   profiles: [ "all", "dynamodb" ]
+  #   extends:
+  #     file: ./sgdb-dynamodb/docker-compose.yml
+  #     service: environment-dynamodb
 
-  ##################### ELASTICSEARCH #####################
-  environment-elasticsearch:
-    profiles: [ "all", "elasticsearch" ]
-    extends:
-      file: ./sgdb-elasticsearch/docker-compose.yml
-      service: environment-elasticsearch
+  # ##################### ELASTICSEARCH #####################
+  # environment-elasticsearch:
+  #   profiles: [ "all", "elasticsearch" ]
+  #   extends:
+  #     file: ./sgdb-elasticsearch/docker-compose.yml
+  #     service: environment-elasticsearch
 
-  ##################### MONGODB #####################
-  environment-mongodb:
-    profiles: [ "all", "mongodb" ]
-    extends:
-      file: ./sgdb-mongodb/docker-compose.yml
-      service: environment-mongodb
+  # ##################### MONGODB #####################
+  # environment-mongodb:
+  #   profiles: [ "all", "mongodb" ]
+  #   extends:
+  #     file: ./sgdb-mongodb/docker-compose.yml
+  #     service: environment-mongodb
 
-  ##################### REDIS #####################
-  environment-redis:
-    profiles: [ "all", "redis" ]
-    extends:
-      file: ./sgdb-redis/docker-compose.yml
-      service: environment-redis
+  # ##################### REDIS #####################
+  # environment-redis:
+  #   profiles: [ "all", "redis" ]
+  #   extends:
+  #     file: ./sgdb-redis/docker-compose.yml
+  #     service: environment-redis
 
 ##################### VOLUMES #####################
 volumes:
@@ -51,14 +82,14 @@ volumes:
     name: environment-mysql
   environment-postgres:
     name: environment-postgres
-  environment-dynamodb:
-    name: environment-dynamodb
-  environment-elasticsearch:
-    name: environment-elasticsearch
-  environment-mongodb:
-    name: environment-mongodb
-  environment-redis:
-    name: environment-redis
+  # environment-dynamodb:
+  #   name: environment-dynamodb
+  # environment-elasticsearch:
+  #   name: environment-elasticsearch
+  # environment-mongodb:
+  #   name: environment-mongodb
+  # environment-redis:
+  #   name: environment-redis
 
 ##################### NETWORKS #####################
 networks:
@@ -66,11 +97,11 @@ networks:
     name: environment-mysql
   environment-postgres:
     name: environment-postgres
-  environment-dynamodb:
-    name: environment-dynamodb
-  environment-elasticsearch:
-    name: environment-elasticsearch
-  environment-mongodb:
-    name: environment-mongodb
-  environment-redis:
-    name: environment-redis
+  # environment-dynamodb:
+  #   name: environment-dynamodb
+  # environment-elasticsearch:
+  #   name: environment-elasticsearch
+  # environment-mongodb:
+  #   name: environment-mongodb
+  # environment-redis:
+  #   name: environment-redis

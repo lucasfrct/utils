@@ -6,7 +6,9 @@ services:
   ##################### MYSQL #####################
   environment-mysql:
     container_name: environment-mysql
-    image: mysql:5.7
+    build: 
+      context: .
+      dockerfile: Dockerfile
     labels:
       environment-mysql: "environment-mysql"
     volumes:
@@ -15,16 +17,12 @@ services:
       - ./.env
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
-      MYSQL_DATABASE: development
-      MYSQL_USER: development
-      MYSQL_ROOT_PASSWORD: Alterar123
-      MYSQL_PASSWORD: Alterar123
     command: --default-authentication-plugin=mysql_native_password
     networks:
       environment-mysql:
     restart: always
     ports:
-      - 3307:3306 # host:container
+      - 3306:3306 # host:container
 
 ##################### VOLUMES #####################
 volumes:

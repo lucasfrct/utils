@@ -1,11 +1,13 @@
 ## Environment POSTGRES
-version: '3.8'
+version: '3.9'
 
 services:
   ##################### POSTGRES #####################
   environment-postgres:
     container_name: environment-postgres
-    image: postgres:9.6.24
+    build:
+      context: .
+      dockerfile: Dockerfile
     labels:
       environment-postgres: "environment-postgres"
     volumes:
@@ -14,13 +16,13 @@ services:
       - ./.env
     environment:
       POSTGRES_DB: development
-      POSTGRES_USER: postgres
+      POSTGRES_USER: development
       POSTGRES_PASSWORD: Alterar123
     networks:
       environment-postgres:
     restart: always
     ports:
-      - "5433:5432" # host:container
+      - "5432:5432" # host:container
 
 ##################### VOLUMES #####################
 volumes:
