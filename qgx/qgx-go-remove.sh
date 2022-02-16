@@ -19,6 +19,7 @@ do
     response=$(cd $path; rm -rf vendor; rm -rf go.*; go get -v -d)
     response=$(git update-index --assume-unchanged go.mod; git update-index --assume-unchanged go.sum)
 
+    sleep 1
     vendor=$(cd $path; git status | grep deleted | grep vendor )
     arrayVendor=($vendor);
 
@@ -31,6 +32,7 @@ do
         fi
        
     done 
+    sleep 1
 done
 
 echo "=== DONE GO REMOVE ==="
