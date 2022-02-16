@@ -1,0 +1,1 @@
+SHOW COLUMNS FROM qgx_baas.transactions_pix;
