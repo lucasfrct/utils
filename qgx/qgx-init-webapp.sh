@@ -1,0 +1,1 @@
+gnome-terminal --tab --title="WEBAPP ANGULAR" --command="bash -c 'cd ~/development/repository/qgx-payment-ip-webapp-angular; npm start; $SHELL'"
