@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## diretório alvo
-qgxPath=~/go/src/github.com/qgx-pagamentos
+qgxPath=~/development/repository
 
 ## Branch alvo
 branchTarget=staging
@@ -9,6 +9,7 @@ branchTarget=staging
 ## iniciando script
 echo "=== QGX PAGAMENTOS ==="
 
+## listando todas as pastas
 microsservices=$(cd $qgxPath; ls)
 array=($microsservices);
 
@@ -17,13 +18,13 @@ do
     ## definindo path do ms
     path=$qgxPath/$microservice
 
-    ## atualizando o repositorio master
+    ## atualizando o repositorio
     response=$(cd $path; git fetch; git switch master; git pull origin master)
 
     ## reinstalando tudo
-    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget; rm -rf vendor; rm -rf go.*; go get -v -d)
-    
+    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget; rm -rf node_modules; npm i)
+
     echo $path
 done
 
-echo "=== DONE GIT PULL ==="
+echo "=== DONE REINSTALL ==="

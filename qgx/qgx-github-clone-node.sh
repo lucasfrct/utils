@@ -18,6 +18,7 @@ do
     echo "clonning $repository ---> $folder"
     git clone $repo $folder
     
+    
 done
 
 echo "=== DONE CLONE ==="
