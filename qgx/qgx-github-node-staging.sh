@@ -22,7 +22,7 @@ do
     response=$(cd $path; git fetch; git switch master; git pull origin master)
     
     ## atualizando o repositorio staging
-    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget; rm -rf node_modules; npm i)
+    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
 
     echo $path
 done
