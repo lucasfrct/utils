@@ -26,4 +26,6 @@ do
     echo $path
 done
 
+source ./qgx-github-go-unchanged.sh
+
 echo "=== DONE GIT PULL ==="

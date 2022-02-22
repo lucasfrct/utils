@@ -3,11 +3,8 @@
 ## diretório alvo
 qgxPath=~/go/src/github.com/qgx-pagamentos
 
-## Branch alvo
-branchTarget=staging
-
 ## iniciando script
-echo "=== QGX PAGAMENTOS - GO REMOVE ==="
+echo "=== QGX PAGAMENTOS - GO UNCHANGED ==="
 
 microsservices=$(cd $qgxPath; ls)
 array=($microsservices);
@@ -15,7 +12,6 @@ array=($microsservices);
 for microservice in ${array[@]}
 do
     path=$qgxPath/$microservice
-    response=$(cd $path; git fetch; git switch $branchTarget; git pull)
     response=$(cd $path; rm -rf vendor; rm -rf go.*; go get -v -d)
     response=$(git update-index --assume-unchanged go.mod; git update-index --assume-unchanged go.sum)
 
@@ -35,4 +31,4 @@ do
     sleep 1
 done
 
-echo "=== DONE GO REMOVE ==="
+echo "=== DONE GO UNCHANGED ==="

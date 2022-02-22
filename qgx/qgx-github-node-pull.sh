@@ -24,7 +24,7 @@ do
     ## atualizando o repositorio staging
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
 
-    echo $path
+    echo "GIT PULL $branchTarget >>> $path"
 done
 
 echo "=== DONE GIT PULL ==="
