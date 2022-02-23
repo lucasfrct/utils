@@ -21,7 +21,7 @@ do
     response=$(cd $path; git fetch; git switch master; git pull origin master)
 
     ## reinstalando tudo
-    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget; rm -rf vendor; rm -rf go.*; go get -v -d)
+    response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
     
     echo $path
 done
