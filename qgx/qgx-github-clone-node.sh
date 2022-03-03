@@ -3,22 +3,23 @@
 ## diretório alvo
 qgxPath=~/development/repository
 
-echo "=== QGX PAGAMENTOS ==="
+echo "=== QGX PAGAMENTOS CLONE NODE ==="
 
-repositories=$(gh repo list qgx-pagamentos -l JavaScript  | xargs -n1 | grep qgx-pagamentos)
+repositories=$(gh repo list qgx-pagamentos | xargs -n1 | grep qgx-pagamentos | grep -v -- -go)
 array=($repositories);
 
 for repository in ${array[@]}
 do
     repo="https://github.com/$repository.git"
     
-    name="${repository/qgx-pagamentos\//""}" 
-    folder="$qgxPath/$name"
+    folder="$qgxPath/$repository"
+
     rm -rf $folder
-    echo "clonning $repository ---> $folder"
-    git clone $repo $folder
+
+    echo "clonning $folder"
     
+    git clone $repo $folder
     
 done
 
-echo "=== DONE CLONE ==="
+echo "=== DONE CLONE NODE ==="
