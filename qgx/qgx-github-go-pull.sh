@@ -7,7 +7,7 @@ qgxPath=~/go/src/github.com/qgx-pagamentos
 branchTarget=staging
 
 ## iniciando script
-echo "=== QGX PAGAMENTOS ==="
+echo "=== QGX PAGAMENTOS - GO-PULL ==="
 
 microsservices=$(cd $qgxPath; ls)
 array=($microsservices);
@@ -17,15 +17,16 @@ do
     ## definindo path do ms
     path=$qgxPath/$microservice
 
+    echo "* $path"
+
     ## atualizando o repositorio master
     response=$(cd $path; git fetch; git switch master; git pull origin master)
 
     ## reinstalando tudo
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
-    
-    echo $path
+    echo ""
 done
 
-source ./qgx-github-go-unchanged.sh
+echo "=== DONE G)-PULL ==="
 
-echo "=== DONE GIT PULL ==="
+source ./qgx-github-go-unchanged.sh
