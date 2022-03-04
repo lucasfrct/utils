@@ -1,25 +1,30 @@
 #!/bin/bash
 
 ## diretório alvo
-qgxPath=~/go/src/github.com
+pathMain=~/go/src/github.com
 
 echo "=== QGX PAGAMENTOS CLONE GO ==="
 
-repositories=$(gh repo list qgx-pagamentos | xargs -n1 | grep -- -go)
+## lista repositorios que são go
+repositoriesList=$(gh repo list qgx-pagamentos | xargs -n1 | grep -- -go)
 
-array=($repositories);
+## transforma a lista num array
+repositories=($repositoriesList);
 
-for repository in ${array[@]}
+for repository in ${repositories[@]}
 do
-    repo="https://github.com/$repository.git"
+    ## monta a url do repositório git
+    repositoryLink="https://github.com/$repository.git"
 
-    folder="$qgxPath/$repository"
+     ## monta o path da pasta local
+    folder="$pathMain/$repository"
 
-    rm -rf $folder
+     ## remove a pasta se ela existir
+    response=$(rm -rf $folder)
     
     echo "clonning $folder"
     
-    git clone $repo "$folder/$repository"
+    response=$(git clone $repositoryLink $folder)
     
 done
 

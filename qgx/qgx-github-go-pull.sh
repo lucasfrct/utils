@@ -1,21 +1,23 @@
 #!/bin/bash
 
 ## diretório alvo
-qgxPath=~/go/src/github.com/qgx-pagamentos
+pathMain=~/go/src/github.com/qgx-pagamentos
 
 ## Branch alvo
 branchTarget=staging
 
-## iniciando script
 echo "=== QGX PAGAMENTOS - GO-PULL ==="
 
-microsservices=$(cd $qgxPath; ls)
-array=($microsservices);
+## lista as pastas locais
+folders=$(cd $pathMain; ls)
 
-for microservice in ${array[@]}
+## transforma a lista de pastas num array
+microservices=($folders);
+
+for microservice in ${microservices[@]}
 do
     ## definindo path do ms
-    path=$qgxPath/$microservice
+    path=$pathMain/$microservice
 
     echo "* $path"
 

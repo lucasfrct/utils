@@ -1,7 +1,7 @@
 #!/bin/bash
 
 ## diretório alvo
-qgxPath=~/development/repository
+pathMain=~/development/repository
 
 ## Branch alvo
 branchTarget=staging
@@ -10,13 +10,15 @@ branchTarget=staging
 echo "=== QGX PAGAMENTOS NODE-PULL ==="
 
 ## listando todas as pastas
-microsservices=$(cd $qgxPath; ls)
-array=($microsservices);
+folders=$(cd $pathMain; ls)
 
-for microservice in ${array[@]}
+## transforma a lista de pastas num array
+microsservices=($folders);
+
+for microservice in ${microsservices[@]}
 do
     ## definindo path do ms
-    path=$qgxPath/$microservice
+    path=$pathMain/$microservice
 
     echo "*$path"
 
