@@ -6,7 +6,7 @@ pathMain=~/go/src/github.com/qgx-pagamentos
 echo "=== QGX PAGAMENTOS - GO UNCHANGED ==="
 
 ## lista as pastas locais
-folders=$(cd $qgxPath; ls)
+folders=$(cd $pathMain; ls)
 
 ## transforma a lista de pastas num array
 microsservices=($folders);
