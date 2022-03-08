@@ -28,6 +28,9 @@ do
     ## atualizando o repositorio staging
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
 
+    # baixando as libraires novas
+    response=$(cd $path; npm i);
+
     echo " "
 done
 

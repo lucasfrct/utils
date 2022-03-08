@@ -24,8 +24,12 @@ do
     ## atualizando o repositorio master
     response=$(cd $path; git fetch; git switch master; git pull origin master)
 
-    ## reinstalando tudo
+    ## atualizando o repositorio staging
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
+
+    ## baixando blibraries novas
+    response=$(cd $path; go get -v -d)
+
     echo ""
 done
 

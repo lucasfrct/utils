@@ -20,8 +20,10 @@ do
 
     # checha se o repositírio tem libraries para instalar
     if test -f "$path/local.sh"; then
-        ## remove a vendor a instala as dependencias
-        response=$(cd $path; rm -rf vendor; rm -rf go.*; go get -v -d)
+        ## remove a vendor 
+        response=$(cd $path; rm -rf vendor; rm -rf go.*)
+        ## a instala as dependencias
+        response=$(cd $path; go get -v -d)
     fi
 
     ## Iginora mudanças em go.mod e go.sum
