@@ -28,8 +28,11 @@ do
     ## atualizando o repositorio staging
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
 
-    # baixando as libraires novas
-    response=$(cd $path; npm i);
+    # checha se o repositírio tem package.json
+    if test -f "$path/package.json"; then
+        # baixando as libraires novas
+        response=$(cd $path; npm i);
+    fi
 
     echo " "
 done
