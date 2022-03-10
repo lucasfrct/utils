@@ -3,16 +3,21 @@ services:
   ##################### GO #####################
   environment-go:
     container_name: environment-go
+    hostname: environment-go
     labels:
       environment-go: "environment-go"
       name: "environment-go"
     # image: cintosyntax/docker-golang-live-reloading
-    build: .
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      target: environment-go
     working_dir: /go/src/github.com/environment-go
     volumes:
       - .:/go/src/github.com/environment-go
     env_file: ".env"
     environment:
+      DEBUG: true
       GO_ENV: "development"
     command: bash -c "gin -i run"
     networks:
