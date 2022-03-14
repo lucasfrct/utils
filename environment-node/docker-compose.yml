@@ -1,31 +1,40 @@
 ## Environment NODE
 version: "3.8"
-
 services:
-
-  environment-node:
-    container_name: environment-node
-    image: environment-node
+  environment:
+    container_name: ${HOSTNAME}
+    hostname: ${HOSTNAME}
+    image: ${HOSTNAME}
     labels:
-      environment-node: "environment-node"
-    build: .
+      description: ${HOSTNAME}
+      org.opencontainers.image.name: ${HOSTNAME}
+      org.opencontainers.image.authors: ${AUTHOR}
+      org.opencontainers.image.hostname: ${HOSTNAME}
+      com.docker.volume.name: ${HOSTNAME}
+      com.docker.network.bridge.name: ${HOSTNAME}
+    build: 
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+        - DIRECTORY=${VOLUME}
+        - ENVIRONMENT=${NODE_ENV}
     volumes:
-      - .:/usr/environment-node
+      - .:${VOLUME}
     env_file:
       - ./.env
     environment:
-      NODE_ENV: development
-    command: npm run development
+      NODE_ENV: ${NODE_ENV}
+    command: npm run ${NODE_ENV}
     networks:
-      - environment-node
+      - local-network
     restart: always
     ports:
-      - 3000:3000
-
+      - ${PORT}:${PORT}
 volumes:
-  environment-node:
-    name: environment-node
+  local-volume:
+    name: ${HOSTNAME}
 networks:
-  environment-node:
-    name: environment-node
+  local-network:
+    name: ${HOSTNAME}
     driver: bridge

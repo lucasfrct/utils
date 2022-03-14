@@ -4,6 +4,15 @@ FROM cintosyntax/docker-golang-live-reloading AS environment-go
 
 ENV PROJECT=github.com/environment-go
 
+LABEL description="environment-go"
+
+LABEL org.opencontainers.image.name="environment-go"
+LABEL org.opencontainers.image.authors="lucasfrct@gmail.com"
+LABEL org.opencontainers.image.hostname="environment-go"
+
+LABEL com.docker.volume.name='environment-go'
+LABEL com.docker.network.bridge.name='environment-go'
+
 # montando WORSKSPACE
 ENV WORKSPACE_GO=/go
 ENV GOBIN=${WORKSPACE_GO}/bin
@@ -33,4 +42,4 @@ RUN go get -v -d
 ## diretorio padrao
 VOLUME ${PATH_PROJECT}
 
-# CMD [ "gin", "-i", "run"]
+CMD [ "gin", "-i", "run"]
