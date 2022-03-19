@@ -1,15 +1,15 @@
-package com.environment.server;
+package com.environment.healthz;
 
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-public class ServerController {
+public class HealthzController {
     
-    @RequestMapping("/")
+    @RequestMapping("/healthz")
     public String index() {
-        return "server 8080\n";
+        return "Health: UP 01";
     }
     
 }

@@ -1,4 +1,4 @@
-package com.dockerforjavadevelopers.hello;
+package com.environment.healthz;
 
 
 import org.springframework.boot.SpringApplication;
