@@ -1,17 +1,21 @@
 ## Environment SGDB
-version: '3.9'
+version: '3'
 
 services:
 
   ##################### MYSQL #####################
   environment-mysql:
-    profiles: [ "all", "mysql", "sql", relationals ]
+    profiles: [ "all", "mysql", "sql", "relationals" ]
     container_name: environment-mysql
+    image: environment-mysql
+    hostname: environment-mysql
+    labels:
+      description: environment-mysql
+      org.opencontainers.image.name: environment-mysql
     build: 
       context: ./sgdb-mysql
       dockerfile: Dockerfile
-    labels:
-      environment-mysql: "environment-mysql"
+    working_dir: /var/lib/mysql
     volumes:
       - ./sgdb-mysql/data:/var/lib/mysql
     env_file:
@@ -29,11 +33,15 @@ services:
   environment-postgres:
     profiles: [ "all", "postgres", "sql", "relationals" ]
     container_name: environment-postgres
-    build:
-      context: .
-      dockerfile: Dockerfile
+    image: environment-postgres
+    hostname: environment-postgres
     labels:
-      environment-postgres: "environment-postgres"
+      description: environment-postgres
+      org.opencontainers.image.name: environment-postgres
+    build:
+      context: ./sgdb-postgres
+      dockerfile: Dockerfile
+    working_dir: /var/lib/postgresql/data
     volumes:
       - ./sgdb-postgres/data:/var/lib/postgresql/data
     env_file:
@@ -50,10 +58,30 @@ services:
 
   # ##################### DYNAMODB #####################
   # environment-dynamodb:
-  #   profiles: [ "all", "dynamodb" ]
-  #   extends:
-  #     file: ./sgdb-dynamodb/docker-compose.yml
-  #     service: environment-dynamodb
+  #   profiles: [ "all", "dynamodb", "nosql", "collections" ]
+  #   container_name: environment-dynamodb
+  #   image: environment-dynamodb
+  #   hostname: environment-dynamodb
+  #   labels:
+  #     description: environment-dynamodb
+  #     org.opencontainers.image.name: environment-dynamodb
+  #   build: 
+  #     context: ./sgdb-dynamodb
+  #     dockerfile: Dockerfile
+  #   working_dir: /tmp
+  #   volumes:
+  #     - ./sgdb-postgres/data:/var/lib/postgresql/data
+  #   env_file:
+  #     - ./sgdb-postgres/.env 
+  #   environment:
+  #     POSTGRES_DB: development
+  #     POSTGRES_USER: development
+  #     POSTGRES_PASSWORD: Alterar123
+  #   networks:
+  #     - local-network
+  #   restart: always
+  #   ports:
+  #     - 5432:5432
 
   # ##################### ELASTICSEARCH #####################
   # environment-elasticsearch:
@@ -82,8 +110,8 @@ volumes:
     name: environment-mysql
   environment-postgres:
     name: environment-postgres
-  # environment-dynamodb:
-  #   name: environment-dynamodb
+  environment-dynamodb:
+    name: environment-dynamodb
   # environment-elasticsearch:
   #   name: environment-elasticsearch
   # environment-mongodb:
@@ -97,8 +125,8 @@ networks:
     name: environment-mysql
   environment-postgres:
     name: environment-postgres
-  # environment-dynamodb:
-  #   name: environment-dynamodb
+  environment-dynamodb:
+    name: environment-dynamodb
   # environment-elasticsearch:
   #   name: environment-elasticsearch
   # environment-mongodb:

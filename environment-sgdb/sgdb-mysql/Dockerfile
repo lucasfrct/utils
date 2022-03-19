@@ -1,9 +1,15 @@
 # ! Derivando da imagem oficial do MySQL
-FROM mysql:5.7 AS mysql
+FROM mysql:5.7 AS environment-mysql
 
 # ! LAbels
 LABEL org.label-schema.name="environment-mysql"
 LABEL org.label-schema.name="environment-mysql"
+LABEL description="environment-mysql"
+LABEL org.opencontainers.image.name="environment-mysql"
+LABEL org.opencontainers.image.authors="Lucas Costa"
+LABEL org.opencontainers.image.hostname="environment-mysql"
+LABEL com.docker.volume.name="environment-mysql"
+LABEL com.docker.network.bridge.name="environment-mysql"
 
 # ! Enviroment
 ENV MYSQL_ALLOW_EMPTY_PASSWORD="yes"
@@ -17,9 +23,6 @@ WORKDIR /var/lib/mysql
 
 # ! Copy database persistent
 COPY ./data .
-
-# ! diretorio padrao
-VOLUME ./data
 
 # ! PORT
 EXPOSE 3306

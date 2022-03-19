@@ -1,33 +1,41 @@
 ## Environment MONGODB
-version: '3.8'
-
+version: '3'
 services:
-  ##################### MONGODB #####################
-  environment-mongodb:
+  environment:
     container_name: environment-mongodb
-    image: mongo:5.0.6
+    image: environment-mongodb
+    hostname: environment-mongodb
     labels:
-      environment-mongodb: "environment-mongodb"
+      description: environment-mongodb
+      org.opencontainers.image.name: environment-mongodb
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-mongodb
+      com.docker.volume.name: environment-mongodb
+      com.docker.network.bridge.name: environment-mongodb
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /data/db
     volumes:
       - ./data:/data/db
+      - local-volume:/data/db/*
+      - local-volume-config:/data/configdb
     env_file:
       - ./.env
     environment:
       MONGO_INITDB_ROOT_USERNAME: development
       MONGO_INITDB_ROOT_PASSWORD: Alterar123
     networks:
-      environment-mongodb:
+      local-network:
     restart: always
     ports:
       - 27017:27017 # host:container
-
-##################### VOLUMES #####################
 volumes:
-  environment-mongodb:
+  local-volume:
     name: environment-mongodb
-
-##################### NETWORKS #####################
+  local-volume-config:
+    name: environment-mongodb-config
 networks:
-  environment-mongodb:
+  local-network:
     name: environment-mongodb
     driver: bridge

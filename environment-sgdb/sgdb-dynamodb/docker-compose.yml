@@ -1,34 +1,37 @@
 ## Environment DYNAMO DB
-version: '3.8'
-
+version: '3'
 services:
-
-  ##################### DYNAMODB #####################
-  environment-dynamodb:
+  environment:
     container_name: environment-dynamodb
-    image: amazon/dynamodb-local:1.18.0
+    image: environment-dynamodb 
+    hostname: environment-dynamodb
     labels:
-      environment-dynamodb: "environment-dynamodb"
+      description: environment-dynamodb
+      org.opencontainers.image.name: environment-dynamodb
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-dynamodb
+      com.docker.volume.name: environment-dynamodb
+      com.docker.network.bridge.name: environment-dynamodb
+    build: 
+      context: ./
+      dockerfile: Dockerfile
     volumes:
       - ./data:/home/dynamodblocal/data
+      - local-volume:/home/dynamodblocal/data/*
     env_file:
       - ./.env
     environment:
       DYNAMODB_USER: development
     command: -jar DynamoDBLocal.jar -sharedDb -dbPath /home/dynamodblocal/data/
     networks:
-      environment-dynamodb:
+      local-network:
     restart: always
     ports:
       - 8000:8000 # host:container
-
-##################### VOLUMES #####################
 volumes:
-  environment-dynamodb:
+  local-volume:
     name: environment-dynamodb
-
-##################### NETWORKS #####################
 networks:
-  environment-dynamodb:
+  local-network:
     name: environment-dynamodb
     driver: bridge

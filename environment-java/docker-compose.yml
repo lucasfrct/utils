@@ -1,9 +1,37 @@
-version: "3.0"
-
+version: "3"
 services:
-  hello-world:
+  environment:
+    container_name: environment-java
+    image: environment-java
+    hostname: environment-java
+    labels:
+      description: environment-java
+      org.opencontainers.image.name: environment-java
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-java
+      com.docker.volume.name: environment-java
+      com.docker.network.bridge.name: environment-java
     build: 
       context: ./
       dockerfile: Dockerfile
+    working_dir: /tmp
+    volumes:
+      - ./:/tmp/
+    env_file:
+      - ./.env 
+    environment:
+      JAVA_ENV: "development"
+    command: java -jar /data/hello-world-0.1.0.jar
+    networks:
+      - local-network
+    restart: always
     ports:
       - 8080:8080
+    
+volumes:
+  local-volume:
+    name: environment-java
+networks:
+  local-network:
+    name: environment-java
+    driver: bridge
