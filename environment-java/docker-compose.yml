@@ -1,27 +1,28 @@
 version: "3"
 services:
   environment:
-    container_name: environment-java
-    image: environment-java
-    hostname: environment-java
+    container_name: ms-onbloarding-authentication-java
+    image: ms-onbloarding-authentication-java
+    hostname: ms-onbloarding-authentication-java
     labels:
-      description: environment-java
-      org.opencontainers.image.name: environment-java
+      description: ms-onbloarding-authentication-java
+      org.opencontainers.image.name: ms-onbloarding-authentication-java
       org.opencontainers.image.authors: Lucas Costa
-      org.opencontainers.image.hostname: environment-java
-      com.docker.volume.name: environment-java
-      com.docker.network.bridge.name: environment-java
+      org.opencontainers.image.hostname: ms-onbloarding-authentication-java
+      com.docker.volume.name: ms-onbloarding-authentication-java
+      com.docker.network.bridge.name: ms-onbloarding-authentication-java
     build: 
       context: ./
       dockerfile: Dockerfile
     working_dir: /tmp
     volumes:
       - ./:/tmp/
+      - local-volume:/tmp/*
     env_file:
       - ./.env 
     environment:
       JAVA_ENV: "development"
-    command: java -jar /data/hello-world-0.1.0.jar
+    command: java -jar /data/environment-java-0.1.0.jar
     networks:
       - local-network
     restart: always
@@ -30,8 +31,8 @@ services:
     
 volumes:
   local-volume:
-    name: environment-java
+    name: ms-onbloarding-authentication-java
 networks:
   local-network:
-    name: environment-java
+    name: ms-onbloarding-authentication-java
     driver: bridge
