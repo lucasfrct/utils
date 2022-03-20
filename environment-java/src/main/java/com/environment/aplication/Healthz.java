@@ -1,11 +1,11 @@
-package com.environment.healthz;
+package com.environment.aplication;
 
 
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-public class HealthzController {
+public class Healthz {
     
     @RequestMapping("/healthz")
     public String index() {
