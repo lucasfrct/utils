@@ -15,7 +15,7 @@ public class UserController {
 
         User user = new UserService();
         System.out.println(user);
-        return "uesr";
+        return "uesr a";
     }
     
 }
