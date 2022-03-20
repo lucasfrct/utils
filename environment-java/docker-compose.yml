@@ -36,3 +36,6 @@ networks:
   local-network:
     name: ms-onbloarding-authentication-java
     driver: bridge
+
+#  mvn package
+#  java -jar .\target\environment-java-0.1.0.jar

@@ -1,5 +1,12 @@
 package com.environment.services;
 
-public class UserService {
-  
+import com.environment.domain.User;
+public class UserService extends User {
+
+    public UserService() {
+        super();
+    }
+
+    
+
 }
