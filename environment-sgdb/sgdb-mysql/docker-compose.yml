@@ -1,22 +1,38 @@
-# Use root/example as user/password credentials
-version: '3.1'
-
+## Environment MYSQL
+version: '3'
 services:
-
-  environment-mysql:
+  environment:
     container_name: environment-mysql
+    image:  mysql:5.7
     hostname: environment-mysql
-    image: mysql
+    labels:
+      description: environment-mysql
+      org.opencontainers.image.name: environment-mysql
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-mysql
+      com.docker.volume.name: environment-mysql
+      com.docker.network.bridge.name: environment-mysql
+    working_dir: /var/lib/mysql
     volumes:
       - ./data:/var/lib/mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    env_file:
+      - ./.env
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: "yes"
       MYSQL_DATABASE: "development"
       MYSQL_USER: "development"
       MYSQL_ROOT_PASSWORD: "Alterar123"
       MYSQL_PASSWORD: "Alterar123"
-    
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      local-network:
+    restart: always
     ports:
-      - 3306:3306
+      - 3306:3306 # host:container
+volumes:
+  local-volume:
+    name: environment-mysql
+networks:
+  local-network:
+    name: environment-mysql
+    driver: bridge
