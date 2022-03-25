@@ -27,12 +27,13 @@ do
     ## atualizando o repositorio staging
     response=$(cd $path; git fetch; git switch $branchTarget; git pull origin $branchTarget)
 
-    ## baixando blibraries novas
+    ## baixando libraries novas
+    ## -fix verifica dependencias e builda pacotes
     response=$(cd $path; go get -v -d)
 
     echo ""
 done
 
-echo "=== DONE G)-PULL ==="
+echo "=== DONE GO-PULL ==="
 
 source ./qgx-github-go-unchanged.sh
