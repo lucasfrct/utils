@@ -1,4 +1,11 @@
+
 #!/bin/bash +x
+
+ec2PublicIp=$(aws ec2 describe-instances --filters 'Name=tag:Name,Values=jumpbox' --query 'Reservations[*].Instances[*].[PublicIpAddress,Tags[?Key==`Name`].Value[]]' --output text 2>&1 | head -n 1)
+
+ssh -i $HOME/development/jumpbox/jumpbox.pem -o ServerAliveInterval=10 ec2-user@$ec2PublicIp; 
+
+
 
 source ./qgx-init-db.sh
 sleep 2

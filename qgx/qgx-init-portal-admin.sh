@@ -1,3 +1,5 @@
+#!/bin/bash +x
+
 gnome-terminal --tab --title="ADMIN CONFIG" --command="bash -c 'cd ~/development/repository/qgx-payment-ip-portal-admin-config-service-node; npm run dev;
 $SHELL'"
 sleep 1

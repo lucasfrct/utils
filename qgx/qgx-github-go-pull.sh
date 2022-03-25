@@ -10,6 +10,7 @@ echo "=== QGX PAGAMENTOS - GO-PULL ==="
 
 ## lista as pastas locais
 folders=$(cd $pathMain; ls)
+#!/bin/bash +x
 
 ## transforma a lista de pastas num array
 microservices=($folders);

@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash +x
 
 ## diretório alvo
 pathMain=~/go/src/github.com
