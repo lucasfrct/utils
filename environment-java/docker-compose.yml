@@ -17,7 +17,7 @@ services:
     working_dir: /tmp
     volumes:
       - ./:/tmp/
-      - local-volume:/tmp/*
+      # - local-volume:/tmp/*
     env_file:
       - ./.env 
     environment:

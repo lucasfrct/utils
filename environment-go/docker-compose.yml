@@ -1,20 +1,24 @@
 version: "3"
 services:
   environment:
-    container_name: environment-go
     image: environment-go
     hostname: environment-go
+    container_name: environment-go
     labels:
       description: environment-go
+      com.docker.volume.name: environment-go
       org.opencontainers.image.name: environment-go
+      com.docker.network.bridge.name: environment-go
       org.opencontainers.image.authors: Lucas Costa
       org.opencontainers.image.hostname: environment-go
-      com.docker.volume.name: environment-go
-      com.docker.network.bridge.name: environment-go
     build: 
       context: ./
-      dockerfile: Dockerfile
       target: environment-go
+      dockerfile: Dockerfile
+    cpus: 1
+    # depends_on:
+    #   - environment-mysql
+    #   - environment-api
     working_dir: /go/src/github.com/environment-go
     volumes:
       - .:/go/src/github.com/environment-go
@@ -34,3 +38,4 @@ networks:
   local-network:
     name: environment-go
     driver: bridge
+u
