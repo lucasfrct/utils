@@ -1,5 +1,7 @@
 #!/bin/bash +x
 
+gnome-terminal --tab --title="OPTIN SERVICE" --command="bash -c 'cd ~/development/repository/qgx-payment-ip-optin-service-node; npm run dev;
+$SHELL'"
 gnome-terminal --tab --title="ADMIN CONFIG" --command="bash -c 'cd ~/development/repository/qgx-payment-ip-portal-admin-config-service-node; npm run dev;
 $SHELL'"
 sleep 1
