@@ -45,3 +45,5 @@ qgx-payment-ip-utils-service-go                        ClusterIP      172.20.203
 qgx-payment-ip-webapp-angular                          ClusterIP      172.20.171.14    <none>                                                                          9001/TCP       102d
 qgx-payment-ip-wiz-token-service-go                    ClusterIP      172.20.110.130   <none>                                                                          8525/TCP       103d
 site-qg2-com-br                                        ClusterIP      172.20.168.107   <none>                                                                          7000/TCP       105d
+
+qgx-payment-ip-portal-admin-account-service-node:8538
