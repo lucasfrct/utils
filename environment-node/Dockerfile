@@ -1,16 +1,14 @@
 
 ## Node alpine
 FROM node:alpine AS environment-node
-## Variáveis 
-ENV DEVELOPMENT_DIR=/usr/environment-node
-ENV DEVELOPMENT_PORT=3000
 
-## steps não cacheados
-ARG CACHEBUST=3 
-ARG CACHEBUST=4 
+## agumentos de entrada
+ARG PORT
+ARG DIRECTORY
+ARG ENVIRONMENT
 
 ## diretorios de trabalho
-WORKDIR ${DEVELOPMENT_DIR}
+WORKDIR ${DIRECTORY}
 
 ## Arquivos de iniciacao par ao node
 COPY package*.json ./
@@ -22,10 +20,10 @@ RUN npm install
 COPY . .
 
 ## porta de acesso
-EXPOSE ${DEVELOPMENT_PORT}  
+EXPOSE ${PORT}  
 
 ## diretorio padrao
-VOLUME ${DEVELOPMENT_DIR}
+VOLUME ${DIRECTORY}
 
 ## start do ambiente
-CMD ["npm", "run", "development"]
+CMD ["npm", "run", ${ENVIRONMENT}]

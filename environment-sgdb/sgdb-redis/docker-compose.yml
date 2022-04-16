@@ -1,33 +1,38 @@
 ## Environment REDIS
-version: '3.8'
+version: '3'
 services:
-
-  ##################### REDIS #####################
-  environment-redis:
+  environment:
     container_name: environment-redis
-    image: redis:7.0-rc1-alpine3.15
+    image: environment-redis
+    hostname: environment-redis
     labels:
-      environment-redis: "environment-redis"
+      description: environment-redis
+      org.opencontainers.image.name: environment-redis
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-redis
+      com.docker.volume.name: environment-redis
+      com.docker.network.bridge.name: environment-redis
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /data
     volumes:
       - ./data:/data
+      - local-volume:/data/*
     env_file:
       - ./.env
     environment:
       REDIS_PASSWORD: Alterar123
     command: redis-server --save 20 1 --loglevel warning --requirepass Alterar123
     networks:
-      environment-redis:
+      local-network:
     restart: always
     ports:
       - 6379:6379 # host:container
-
-##################### VOLUMES #####################
 volumes:
-  environment-redis:
+  local-volume:
     name: environment-redis
-
-##################### NETWORKS #####################
 networks:
-  environment-redis:
+  local-network:
     name: environment-redis
     driver: bridge

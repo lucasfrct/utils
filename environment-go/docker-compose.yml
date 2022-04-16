@@ -1,34 +1,41 @@
-version: "3.8"
+version: "3"
 services:
-  ##################### GO #####################
-  environment-go:
+  environment:
+    image: environment-go
+    hostname: environment-go
     container_name: environment-go
     labels:
-      environment-go: "environment-go"
-      name: "environment-go"
-    image: cintosyntax/docker-golang-live-reloading
+      description: environment-go
+      com.docker.volume.name: environment-go
+      org.opencontainers.image.name: environment-go
+      com.docker.network.bridge.name: environment-go
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-go
+    build: 
+      context: ./
+      target: environment-go
+      dockerfile: Dockerfile
+    cpus: 1
+    # depends_on:
+    #   - environment-mysql
+    #   - environment-api
+    working_dir: /go/src/github.com/environment-go
     volumes:
       - .:/go/src/github.com/environment-go
     env_file: ".env"
     environment:
       GO_ENV: "development"
-      GOPATH: /go
-      GOBIN: /go/bin
-      GOPRIVATE: github.com/environment-go
-    command: bash -c "cd /go/src/github.com/environment-go; gin -i run"
+    command: bash -c "gin -i run"
     networks:
-      - environment-go
+      - local-network
     restart: always
     ports:
       - 5000:5000
-
-##################### VOLUMES #####################
 volumes:
-  environment-go:
+  local-volume:
     name: environment-go
-
-##################### NETWORK #####################
 networks:
-  environment-go:
+  local-network:
     name: environment-go
     driver: bridge
+u

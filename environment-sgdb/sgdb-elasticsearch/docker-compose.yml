@@ -1,36 +1,41 @@
 ## Environment ELASTIC SEARCH
-version: '3.8'
-
+version: '3'
 services:
-  ##################### ELASTIC SEARCH #####################
-  environment-elasticsearch:
+  environment:
     container_name: environment-elasticsearch
-    image: elasticsearch:7.17.0
+    image: environment-elasticsearch
+    hostname: environment-elasticsearch
     labels:
-      environment-elasticsearch: "environment-elasticsearch"
+      description: environment-elasticsearch
+      org.opencontainers.image.name: environment-elasticsearch
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-elasticsearch
+      com.docker.volume.name: environment-elasticsearch
+      com.docker.network.bridge.name: environment-elasticsearch
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /usr/share/elasticsearch/data
     volumes:
       - ./data:/usr/share/elasticsearch/data
+      - local-volume:/usr/share/elasticsearch/data/*
     env_file:
       - ./.env
     environment:
-      - node.name=es01
-      - cluster.name=es-evironment-development
-      - cluster.initial_master_nodes=es01
+      - node.name=environment-es01
+      - cluster.name=evironment-es
+      - cluster.initial_master_nodes=environment-es01
       - bootstrap.memory_lock=true
       - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
     networks:
-      environment-elasticsearch:
+      local-network:
     restart: always
     ports:
       - 9200:9200 # host:container
-
-##################### VOLUMES #####################
 volumes:
-  environment-elasticsearch:
+  local-volume:
     name: environment-elasticsearch
-
-##################### NETWORKS #####################
 networks:
-  environment-elasticsearch:
+  local-network:
     name: environment-elasticsearch
     driver: bridge

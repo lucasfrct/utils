@@ -1,34 +1,40 @@
 ## Environment POSTGRES
-version: '3.8'
-
+version: '3'
 services:
-  ##################### POSTGRES #####################
-  environment-postgres:
+  environment:
     container_name: environment-postgres
-    image: postgres:9.6.24
+    image: environment-postgres
+    hostname: environment-postgres
     labels:
-      environment-postgres: "environment-postgres"
+      description: environment-postgres
+      org.opencontainers.image.name: environment-postgres
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-postgres
+      com.docker.volume.name: environment-postgres
+      com.docker.network.bridge.name: environment-postgres
+
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    working_dir: /var/lib/postgresql/data
     volumes:
       - ./data:/var/lib/postgresql/data
+      - local-volume:/var/lib/postgresql/data/*
     env_file:
       - ./.env
     environment:
       POSTGRES_DB: development
-      POSTGRES_USER: postgres
+      POSTGRES_USER: development
       POSTGRES_PASSWORD: Alterar123
     networks:
-      environment-postgres:
+      local-network:
     restart: always
     ports:
-      - "5433:5432" # host:container
-
-##################### VOLUMES #####################
+      - "5432:5432" # host:container
 volumes:
-  environment-postgres:
+  local-volume:
     name: environment-postgres
-
-##################### NETWORKS #####################
 networks:
-  environment-postgres:
+  local-network:
     name: environment-postgres
     driver: bridge
