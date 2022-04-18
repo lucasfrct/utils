@@ -12,7 +12,7 @@ const logger = pino(stream)
 const app = express();
 
 app.get("/healthz", (req, res) => {
-    res.send("OK");
+    res.send("UP");
 });
 
 app.listen(process.env.PORT,()=>{

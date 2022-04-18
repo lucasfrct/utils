@@ -48,6 +48,7 @@ asdf install yarn latest
 ## PYTHON
 asdf plugin add python
 asdf install python latest
+sudo pacman -S --noconfirm python-pip 
 
 ## TERRAFORM
 asdf plugin add terraform

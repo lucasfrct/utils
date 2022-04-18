@@ -1,0 +1,42 @@
+## Environment NODE
+version: "3"
+services:
+  environment:
+    image: environment-python
+    hostname: environment-python
+    container_name: environment-python
+    labels:
+      description: environment-python
+      org.opencontainers.image.name: environment-python
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-python
+      com.docker.volume.name: environment-python
+      com.docker.network.bridge.name: environment-python
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    cpus: 1
+    # depends_on:
+    #   - environment-mysql
+    #   - environment-api
+    working_dir: /usr/environment-python
+    volumes:
+      - .:/usr/environment-python
+      - local-volume:/usr/environment-python
+    env_file:
+      - ./.env
+    environment:
+      PYTHON_ENV: development
+    command: flask run --host=0.0.0.0
+    networks:
+      - local-network
+    restart: always
+    ports:
+      - 5000:5000
+volumes:
+  local-volume:
+    name: environment-python
+networks:
+  local-network:
+    name: environment-python
+    driver: bridge

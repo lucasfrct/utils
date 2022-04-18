@@ -8,7 +8,7 @@ public class Healthz {
     
     @RequestMapping("/healthz")
     public String index() {
-        return "Health: UP 06";
+        return "UP";
     }
     
 }

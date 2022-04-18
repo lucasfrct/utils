@@ -22,15 +22,19 @@ services:
     working_dir: /go/src/github.com/environment-go
     volumes:
       - .:/go/src/github.com/environment-go
-    env_file: ".env"
+      - local-volume:/go/src/github.com/environment-go
+    env_file: 
+      - ./.env
     environment:
       GO_ENV: "development"
+      GOPORT: 9000
     command: bash -c "gin -i run"
     networks:
       - local-network
     restart: always
     ports:
-      - 5000:5000
+      - 9000:9000
+      - 9001:3000 # go gin live reload
 volumes:
   local-volume:
     name: environment-go
@@ -38,4 +42,3 @@ networks:
   local-network:
     name: environment-go
     driver: bridge
-u

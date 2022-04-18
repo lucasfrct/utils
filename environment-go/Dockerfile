@@ -25,7 +25,7 @@ RUN mkdir -p ${GOPKG}
 RUN mkdir -p ${GOSRC}
 
 ## Variáveis 
-ENV PATH_PROJECT=${GOSRC}/${PROJECT}}
+ENV PATH_PROJECT=${GOSRC}/${PROJECT}
 
 ## diretorios de trabalho
 WORKDIR ${PATH_PROJECT}
@@ -36,8 +36,16 @@ RUN export GOPRIVATE=${PROJECT}
 ## Copia projeto
 COPY . .
 
+## alterar permissóes par ao formato linux
+RUN find . -type f -print0 | xargs -0 sed -i 's/\r$//'
+RUN find . -type d -print0 | xargs -0 chmod 755  
+RUN find . -type f -print0 | xargs -0 chmod 644
+RUN chmod -R +x *.go
+
 RUN go get -v -d 
-# RUN gin -i run
+
+EXPOSE 9000
+EXPOSE 9001:3000
 
 ## diretorio padrao
 VOLUME ${PATH_PROJECT}
