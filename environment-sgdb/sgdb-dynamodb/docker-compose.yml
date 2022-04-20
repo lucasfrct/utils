@@ -2,8 +2,8 @@
 version: '3'
 services:
   environment:
-    container_name: environment-dynamodb
     image: environment-dynamodb 
+    container_name: environment-dynamodb
     hostname: environment-dynamodb
     labels:
       description: environment-dynamodb
@@ -14,10 +14,15 @@ services:
       com.docker.network.bridge.name: environment-dynamodb
     build: 
       context: ./
+      target: environment-dynamodb
       dockerfile: Dockerfile
+    cpus: 1
+    # depends_on:
+    #   - environment-mysql
+    #   - environment-api
     volumes:
       - ./data:/home/dynamodblocal/data
-      - local-volume:/home/dynamodblocal/data/*
+      - local-volume:/home/dynamodblocal/data
     env_file:
       - ./.env
     environment:

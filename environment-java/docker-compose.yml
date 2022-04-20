@@ -18,7 +18,7 @@ services:
     working_dir: /usr/environment-java
     volumes:
       - ./:/usr/environment-java
-      - local-volume:/usr/environment-java
+      - local-volume:/usr/environment-java/shared
     env_file:
       - ./.env 
     environment:

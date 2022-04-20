@@ -15,26 +15,27 @@ services:
       context: ./
       target: environment-go
       dockerfile: Dockerfile
-    cpus: 1
-    # depends_on:
+    cpus: 2
+     # depends_on:
     #   - environment-mysql
     #   - environment-api
-    working_dir: /go/src/github.com/environment-go
+    working_dir: /usr/go/src/github.com/environment-go
     volumes:
-      - .:/go/src/github.com/environment-go
-      - local-volume:/go/src/github.com/environment-go
+      - .:/usr/go/src/github.com/environment-go
+      - local-volume:/usr/src/github.com/environment-go/shared
     env_file: 
       - ./.env
     environment:
       GO_ENV: "development"
       GOPORT: 9000
-    command: bash -c "gin -i run"
+    command: >
+      bash -c "gin -i run"
     networks:
       - local-network
-    restart: always
+    restart: unless-stopped
     ports:
-      - 9000:9000
-      - 9001:3000 # go gin live reload
+      - ${PORT}:${PORT}
+      - 9001:3000
 volumes:
   local-volume:
     name: environment-go

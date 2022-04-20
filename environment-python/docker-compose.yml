@@ -22,7 +22,7 @@ services:
     working_dir: /usr/environment-python
     volumes:
       - .:/usr/environment-python
-      - local-volume:/usr/environment-python
+      - local-volume:/usr/environment-python/shared
     env_file:
       - ./.env
     environment:

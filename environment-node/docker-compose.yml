@@ -20,7 +20,7 @@ services:
     working_dir: /usr/environment-node
     volumes:
       - .:/usr/environment-node
-      - local-volume:/usr/environment-node
+      - local-volume:/usr/environment-node/shared
     env_file:
       - ./.env
     environment:

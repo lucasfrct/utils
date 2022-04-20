@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:20.04 as environment-python
 
 RUN apt -y update
 RUN apt -y -f install build-essential zlib1g-dev libncurses5-dev 

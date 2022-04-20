@@ -14,6 +14,7 @@ LABEL com.docker.network.bridge.name="environment-dynamodb"
 # ! Enviroment
 ENV DYNAMODB_USER="development"
 
+
 # ! Copy database persistent
 COPY ./data /home/dynamodblocal/data
 
