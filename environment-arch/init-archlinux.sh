@@ -7,7 +7,7 @@ sudo pacman -Syy archlinux-keyring
 
 ## integracao com vscode
 sudo pacman -Syyuu
-sudo pacman -S --noconfirm  base-devel
+sudo pacman -S --noconfirm --needed base-devel
 sudo pacman -S --noconfirm curl
 sudo pacman -S --noconfirm wget
 sudo pacman -S --noconfirm git
