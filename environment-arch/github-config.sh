@@ -1,5 +1,6 @@
 #!/bin/bash +x
 
+## GITHUB Configure
 yes | sudo pacman -Sy openssh
 git config --global user.name "lucasfrct"
 git config --global user.email "lucasfrct@gmail.com"
@@ -11,4 +12,4 @@ ssh-add ~/.ssh/id_rsa
 cat ~/.ssh/id_rsa.pub
 ssh -T git@github.com
 git remote -v
-git remote set-url origin git@github.com:lucasfrct/{repository}.git
+# git remote set-url origin git@github.com:lucasfrct/{repository}.git
