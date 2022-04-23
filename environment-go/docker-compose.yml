@@ -16,7 +16,7 @@ services:
       target: environment-go
       dockerfile: Dockerfile
     cpus: 2
-     # depends_on:
+    # depends_on:
     #   - environment-mysql
     #   - environment-api
     working_dir: /usr/go/src/github.com/environment-go
