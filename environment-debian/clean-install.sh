@@ -9,7 +9,6 @@ sudo apt -y install alien libaio1 unixodbc
 sudo export NLS_DATE_FORMAT="dd/mm/yyyy"
 
 ## GITHUB Configure
-yes | sudo pacman -Sy openssh
 git config --global user.name "lucasfrct"
 git config --global user.email "lucasfrct@gmail.com"
 git config --global color.ui true
@@ -44,3 +43,13 @@ sudo chown $USER /var/run/docker.sock
 sudo usermod -aG docker $USER
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo service docker restart
+
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt-get install libcap2-bin 
+sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``   
+sudo apt-get install libcap2-bin
+sudo setcap cap_net_bind_service=+ep /usr/local/bin/node
+sudo setcap cap_net_bind_service=+ep /usr/local/node
+sudo apt-get install ufw
+sudo ufw status
+sudo ufw allow 80/tcp
