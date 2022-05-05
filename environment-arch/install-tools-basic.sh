@@ -12,5 +12,8 @@ yay -S --noconfirm paper-gtk-theme paper-icon-theme
 yay -S --noconfirm gnome-tweak-tool
 yay -S --noconfirm gparted
 
+yay -S --noconfirm mongodb-compass
+sudo pamac install mongodb-compass
+
 sudo snap install spotify
 sudo snap install postman
