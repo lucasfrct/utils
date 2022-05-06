@@ -21,7 +21,7 @@ ssh -T git@github.com
 git remote -v
 # git remote set-url origin git@github.com:lucasfrct/{repository}.git
 
-mkdir github.com github.com/tai-uisa github.com/tai-uisa
+mkdir github.com github.com/tai-uisa
 
 ## DOCKER
 sudo apt remove docker docker-engine docker.io containerd runc
@@ -50,6 +50,3 @@ sudo setcap cap_net_bind_service=+ep `readlink -f \`which node\``
 sudo apt-get install libcap2-bin
 sudo setcap cap_net_bind_service=+ep /usr/local/bin/node
 sudo setcap cap_net_bind_service=+ep /usr/local/node
-sudo apt-get install ufw
-sudo ufw status
-sudo ufw allow 80/tcp
