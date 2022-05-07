@@ -43,6 +43,11 @@ sudo chown $USER /var/run/docker.sock
 sudo usermod -aG docker $USER
 sudo ln -s /usr/local/bin/docker-compose /usr/bin/docker-compose
 sudo service docker restart
+sudo groupadd docker
+sudo usermod -aG docker $USER
+newgrp docker
+sudo systemctl enable docker.service
+sudo systemctl enable containerd.service
 
 curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
 sudo apt-get install libcap2-bin 
