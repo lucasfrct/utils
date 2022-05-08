@@ -2,11 +2,11 @@
 
 source add-user-sudo.sh
 source init-archlinux.sh
-# source install-yay.sh
+source install-yay.sh
 # source install-yaourt.sh
 # source install-zsh.sh
 # source install-asdf.sh
-source install-tools-basic.sh
+# source install-tools-basic.sh
 # source install-tools.sh
 # source install-docker.sh
 # source install-c.sh
