@@ -7,7 +7,7 @@ git config --global user.name $USERNAME
 git config --global user.email $EMAIL
 git config --global color.ui true
 ssh-keygen -t rsa -C $EMAIL
-cat ~/.ssh/id_rsa.pub
+cat ~/.ssh/id_rsa.pub >> rsa.pub.txt
 ssh -T git@github.com
-git remote -v
-git remote set-url origin git@github.com:$USERNAME/$REPOSITORY
+# git remote -v
+# git remote set-url origin git@github.com:$USERNAME/$REPOSITORY
