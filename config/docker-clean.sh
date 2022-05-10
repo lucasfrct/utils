@@ -1,3 +1,4 @@
+#!/bin/bash +x
 
 ## para todos os cotainers
 # sudo docker kill $(docker ps -q)
