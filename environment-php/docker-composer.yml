@@ -1,0 +1,40 @@
+## Environment NODE
+version: "3"
+services:
+  environment:
+    image: environment-node
+    hostname: environment-node
+    container_name: environment-node
+    labels:
+      description: environment-node
+      org.opencontainers.image.name: environment-node
+      org.opencontainers.image.authors: Lucas Costa
+      org.opencontainers.image.hostname: environment-node
+      com.docker.volume.name: environment-node
+      com.docker.network.bridge.name: environment-node
+    build: 
+      context: ./
+      target: environment-node
+      dockerfile: Dockerfile
+    cpus: 1
+    working_dir: /usr/environment-node
+    volumes:
+      - .:/usr/environment-node
+      - local-volume:/usr/environment-node/shared
+    env_file:
+      - ./.env
+    environment:
+      NODE_ENV: development
+    command: npm run dev
+    networks:
+      - local-network
+    restart: always
+    ports:
+      - 3000:3000
+volumes:
+  local-volume:
+    name: environment-node
+networks:
+  local-network:
+    name: environment-node
+    driver: bridge

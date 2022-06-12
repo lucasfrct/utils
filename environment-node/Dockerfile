@@ -35,7 +35,6 @@ RUN find . -type f -print0 | xargs -0 chmod 644
 RUN chmod -R +x *.js
 # RUN chmod -R +x *.ts
 
-
 ## porta de acesso
 EXPOSE 3000 
 
