@@ -20,6 +20,6 @@ func PrivateRoutes(app *fiber.App) {
 	* @api {post} /hooks
 	 */
 	route.Post("/hooks", hooks)
-	app.Post("/hokks", hooks)
+	app.Post("/hooks", hooks)
 
 }
