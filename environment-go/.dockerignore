@@ -1,2 +1,5 @@
 tmp
-config-environment-golang.ps1
+Dockerfile*
+docker-compose*
+gin-bin
+shared

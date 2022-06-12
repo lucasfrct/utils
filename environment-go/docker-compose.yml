@@ -6,40 +6,23 @@ services:
     container_name: environment-go
     labels:
       description: environment-go
-      com.docker.volume.name: environment-go
-      org.opencontainers.image.name: environment-go
-      com.docker.network.bridge.name: environment-go
-      org.opencontainers.image.authors: Lucas Costa
-      org.opencontainers.image.hostname: environment-go
     build: 
       context: ./
-      target: environment-go
       dockerfile: Dockerfile
-    cpus: 2
-    # depends_on:
-    #   - environment-mysql
-    #   - environment-api
-    working_dir: /usr/go/src/github.com/environment-go
     volumes:
-      - .:/usr/go/src/github.com/environment-go
-      - local-volume:/usr/src/github.com/environment-go/shared
+      - .:/usr/local/github.com/lucasfrct/environment-go
     env_file: 
       - ./.env
     environment:
       GO_ENV: "development"
-      GOPORT: 9000
-    command: >
-      bash -c "gin -i run"
+      GOPORT: ${PORT}
+    command: bash -c "gin -i run"
     networks:
       - local-network
     restart: unless-stopped
     ports:
       - ${PORT}:${PORT}
-      - 9001:3000
 volumes:
   local-volume:
-    name: environment-go
 networks:
   local-network:
-    name: environment-go
-    driver: bridge
