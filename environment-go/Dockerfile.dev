@@ -1,0 +1,54 @@
+
+## GO lang com live-reload para desenvolvimento
+FROM golang:1.18 AS environment-go
+
+## Labels
+LABEL description="environment-go"
+
+## install gin live reload
+RUN go install github.com/codegangsta/gin@latest
+# RUN go install github.com/beego/bee/v2@latest
+
+## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV TZ=America/Sao_Paulo
+# ENV GOFLAGS=-mod=vendor
+ENV GO111MODULE=on
+ENV GOPRIVATE=*
+
+## Atulaiza o continer
+RUN apt -y update
+RUN apt -y install build-essential wget git unzip gcc tzdata
+
+## NEW TIMEZONE
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+## copia o módulo
+COPY go.mod .
+COPY go.sum .
+
+# ## Copia as dependencias
+COPY ./vendor ./vendor
+
+## instalando pacotes
+RUN go mod download
+RUN go mod vendor
+RUN go mod verify
+
+COPY ./ ./
+
+## altera permissoes de pastas e arquivos
+RUN chmod -R +x *.go
+
+## portas de acesso
+EXPOSE 9000
+
+## diretorio padrao
+VOLUME "$APP_HOME"
+
+CMD ["gin", "-i", "run"]
+# CMD ["bee", "run"]

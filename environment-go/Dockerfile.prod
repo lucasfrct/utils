@@ -1,0 +1,57 @@
+## GO lang instalar e buildar a aplicação
+FROM registry.semaphoreci.com/golang:1.18 as builder
+
+## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV GOFLAGS=-mod=vendor
+ENV GO111MODULE=on
+ENV GOPRIVATE=*
+
+## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+COPY ./ ./
+
+## instalando pacotes
+RUN go mod download
+RUN go mod vendor
+RUN go mod verify
+RUN go build -o  environment-go
+
+## Imagem do ambiente de produção
+FROM registry.semaphoreci.com/golang:1.18
+
+## Labels
+LABEL description="environment-go"
+
+## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src/environment-go
+ENV TZ=America/Sao_Paulo
+ENV GOFLAGS=-mod=vendor
+ENV GO111MODULE=on
+ENV GOPRIVATE=*
+
+## Atulaiza o continer
+RUN apt -y update
+RUN apt -y install build-essential wget git unzip gcc tzdata
+
+## NEW TIMEZONE
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+COPY --from=builder "$APP_HOME"/app-go $APP_HOME
+
+## altera permissoes de pastas e arquivos
+RUN chmod -R +x *.go
+
+## portas de acesso
+EXPOSE 9001
+
+## diretorio padrao
+VOLUME "$APP_HOME"
+
+CMD ["./app-go"]
+

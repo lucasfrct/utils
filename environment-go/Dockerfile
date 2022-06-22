@@ -1,55 +1,28 @@
+FROM golang:1.18 AS build
 
-## GO lang com live-reload
-FROM golang:1.18 AS environment-go
-
-## Configurando variáveis de Ambiente
-ENV PATH_PROJECT='/usr/local/github.com/lucasfrct/environment-go'
-ENV TZ=America/Sao_Paulo
+ENV GOFLAGS=-mod=vendor
 ENV GO111MODULE=on
 ENV GOPRIVATE=*
 
-## Labels
-LABEL description="environment-go"
-LABEL org.opencontainers.image.name="environment-go"
-LABEL org.opencontainers.image.authors="IT Lean, Lucas Costa"
-LABEL org.opencontainers.image.hostname="environment-go"
-LABEL com.docker.volume.name='environment-go'
-LABEL com.docker.network.bridge.name='environment-go'
-
-## Atulaiza o continer
-RUN apt -y update
-RUN apt -y install build-essential wget git unzip gcc tzdata
-
-## NEW TIMEZONE
-RUN echo $TZ > /etc/timezone
-RUN dpkg-reconfigure -f noninteractive tzdata
-
-## diretorio de trabalho
-WORKDIR ${PATH_PROJECT}
-
-## install gin live reload
-RUN go install github.com/codegangsta/gin@latest
-
-## copia o módulo
-COPY go.mod .
-COPY go.sum .
-
-# ## Copia as dependencias
-COPY ./vendor ./vendor
-
-## instalando pacotes
-RUN go mod download && go mod verify
-RUN go mod vendor
+WORKDIR /app         
 
 COPY ./ ./
 
-## altera permissoes de pastas e arquivos
-RUN chmod -R +x *.go
+RUN go mod tidy
+RUN go mod download
+RUN go mod vendor
+RUN go mod verify
+RUN go build -o /server
 
-## portas de acesso
+## ditro para rodar somente binarios
+FROM gcr.io/distroless/base-debian10
+
+WORKDIR /
+
+COPY --from=build /server /server
+
 EXPOSE 9000
 
-## diretorio padrao
-VOLUME ${PATH_PROJECT}
+USER nonroot:nonroot
 
-CMD ["gin", "-i", "run"]
+ENTRYPOINT [ "/server" ]

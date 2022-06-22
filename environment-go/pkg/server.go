@@ -58,7 +58,7 @@ func (s *Server) Listen(arg ...int) {
 	fmt.Println("#")
 	fmt.Println("# $TZ: ", os.Getenv("TZ"))
 	fmt.Println("# $GOPORT: ", os.Getenv("GOPORT"))
-	fmt.Println("# $PATH_PROJECT: ", os.Getenv("PATH_PROJECT"))
+	fmt.Println("# $APP_HOME: ", os.Getenv("APP_HOME"))
 	fmt.Println("# Server UP: ", now.Format("2006-01-02 15:04:05"), "UTC")
 	fmt.Println("")
 

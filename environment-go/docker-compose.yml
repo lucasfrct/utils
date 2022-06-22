@@ -8,21 +8,16 @@ services:
       description: environment-go
     build: 
       context: ./
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     volumes:
-      - .:/usr/local/github.com/lucasfrct/environment-go
+      - .:/go/src
     env_file: 
       - ./.env
     environment:
       GO_ENV: "development"
       GOPORT: ${PORT}
     command: bash -c "gin -i run"
-    networks:
-      - local-network
+    # command: bash -c "bee run"
     restart: unless-stopped
     ports:
       - ${PORT}:${PORT}
-volumes:
-  local-volume:
-networks:
-  local-network:
