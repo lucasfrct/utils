@@ -9,6 +9,7 @@ services:
     build: 
       context: ./
       dockerfile: Dockerfile.dev
+    working_dir: /go/src
     volumes:
       - .:/go/src
     env_file: 
@@ -16,8 +17,22 @@ services:
     environment:
       GO_ENV: "development"
       GOPORT: ${PORT}
+      TZ: ${TIMEZONE}
     command: bash -c "gin -i run"
-    # command: bash -c "bee run"
     restart: unless-stopped
     ports:
       - ${PORT}:${PORT}
+
+  production:
+    image: production-go
+    hostname: production-go
+    container_name: production-go
+    build: 
+      context: ./
+      dockerfile: Dockerfile
+    command: bash -c "gin -i run"
+    environment:  
+      GOPORT: 9001
+    restart: unless-stopped
+    ports:
+      - 9001:9001

@@ -1,28 +1,58 @@
-FROM golang:1.18 AS build
 
-ENV GOFLAGS=-mod=vendor
+# ## GO lang com live-reload para desenvolvimento
+
+# ## Maquina para almazenasr as dependencias 
+FROM golang:1.18 AS environment-go-dependences
+
+# ## install gin live reload
+RUN go install github.com/codegangsta/gin@latest
+
+# ## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV TZ=America/Sao_Paulo
 ENV GO111MODULE=on
 ENV GOPRIVATE=*
+ENV CGO_ENABLED=0
 
-WORKDIR /app         
+# ## Atulaiza o continer
+RUN apt -y update
+RUN apt -y install tzdata
 
+# ## NEW TIMEZONE
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# ## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+## copia o módulo
+COPY go.* .
+
+# ## baixa as dependencias
+RUN go mod download
+
+
+## Maquina para excutar o ambiente de desenvolvimento
+FROM environment-go-dependences AS environment-go
+
+## Labels
+LABEL description="environment-go"
+
+## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV GOPORT=9001
+
+# ## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+# ## copia a aplicacao para dentro da maquina
 COPY ./ ./
 
-RUN go mod tidy
-RUN go mod download
-RUN go mod vendor
-RUN go mod verify
-RUN go build -o /server
+## portas de acesso
+EXPOSE "$GOPORT"
 
-## ditro para rodar somente binarios
-FROM gcr.io/distroless/base-debian10
+# ## cria volume para diretorio padrao
+VOLUME "$APP_HOME"
 
-WORKDIR /
-
-COPY --from=build /server /server
-
-EXPOSE 9000
-
-USER nonroot:nonroot
-
-ENTRYPOINT [ "/server" ]
+# ## Executa a aplicacao
+CMD ["gin", "-i", "run"]
