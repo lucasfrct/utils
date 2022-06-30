@@ -10,16 +10,17 @@ func PrivateRoutes(app *fiber.App) {
 
 	/**
 	* verifica se o servidor está online
-	* @api {get} /health
 	 */
 	route.Get("/health", health)
-	app.Get("/health", health)
 
 	/**
 	* verifica se o hook está online
-	* @api {post} /hooks
 	 */
-	route.Post("/hooks", hooks)
-	app.Post("/hooks", hooks)
+	route.Post("/hooks/health", hooks)
+
+	/**
+	* retorna erro 404 para qualquer requiscao invalida
+	 */
+	app.Use("/", notFound)
 
 }

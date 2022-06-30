@@ -31,7 +31,6 @@ COPY go.* .
 # ## baixa as dependencias
 RUN go mod download
 
-
 ## Maquina para excutar o ambiente de desenvolvimento
 FROM environment-go-dependences AS environment-go
 

@@ -15,7 +15,7 @@ func main() {
 	server.New()
 	server.Routes(routes.PrivateRoutes)
 	server.Middlewares(middleware.Cors)
-	server.Middlewares(middleware.Logger)
+	// server.Middlewares(middleware.Logger)
 
 	port := os.Getenv("GOPORT")
 	fmt.Println("port: ", port)
