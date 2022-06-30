@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"log"
 	"os"
-	"os/signal"
-	"strconv"
 	"sync"
 	"time"
 
@@ -33,41 +31,21 @@ func (s *Server) New() *fiber.App {
 	return s.instance
 }
 
-func (s *Server) Listen(arg ...int) {
-
-	idleConnsClosed := make(chan struct{})
-
-	go func() {
-		sigint := make(chan os.Signal, 1)
-		signal.Notify(sigint, os.Interrupt) // Catch OS signals.
-		<-sigint
-
-		if err := s.instance.Shutdown(); err != nil {
-			log.Printf("O Server foi derrubado: %v", err)
-		}
-
-		close(idleConnsClosed)
-	}()
-
-	if len(arg) > 0 {
-		os.Setenv("GOPORT", strconv.Itoa(arg[0]))
-	}
+func (s *Server) Listen(port string) {
 
 	now := time.Now().UTC()
 
 	fmt.Println("#")
 	fmt.Println("# $TZ: ", os.Getenv("TZ"))
-	fmt.Println("# $GOPORT: ", os.Getenv("GOPORT"))
-	fmt.Println("# $PATH_PROJECT: ", os.Getenv("PATH_PROJECT"))
+	fmt.Println("# $PORT: ", port)
+	fmt.Println("# $APP_HOME: ", os.Getenv("APP_HOME"))
 	fmt.Println("# Server UP: ", now.Format("2006-01-02 15:04:05"), "UTC")
 	fmt.Println("")
 
-	err := s.instance.Listen(":" + os.Getenv("GOPORT"))
+	err := s.instance.Listen(":" + port)
 	if err != nil {
 		log.Printf("O Server foi derrubado: %v", err)
 	}
-
-	<-idleConnsClosed
 }
 
 func (s *Server) Routes(routes func(*fiber.App)) {

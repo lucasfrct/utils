@@ -1,6 +1,9 @@
 package main
 
 import (
+	"fmt"
+	"os"
+
 	"github.com/lucasfrct/environment-go/pkg"
 	"github.com/lucasfrct/environment-go/pkg/middleware"
 	"github.com/lucasfrct/environment-go/pkg/routes"
@@ -14,6 +17,9 @@ func main() {
 	server.Middlewares(middleware.Cors)
 	server.Middlewares(middleware.Logger)
 
-	server.Listen(9000)
+	port := os.Getenv("GOPORT")
+	fmt.Println("port: ", port)
+
+	server.Listen(port)
 
 }

@@ -1,0 +1,58 @@
+
+# ## GO lang com live-reload para desenvolvimento
+
+# ## Maquina para almazenasr as dependencias 
+FROM golang:1.18 AS environment-go-dependences
+
+# ## install gin live reload
+RUN go install github.com/codegangsta/gin@latest
+
+# ## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV TZ=America/Sao_Paulo
+ENV GO111MODULE=on
+ENV GOPRIVATE=*
+ENV CGO_ENABLED=0
+
+# ## Atulaiza o continer
+RUN apt -y update
+RUN apt -y install tzdata
+
+# ## NEW TIMEZONE
+RUN echo $TZ > /etc/timezone
+RUN dpkg-reconfigure -f noninteractive tzdata
+
+# ## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+## copia o módulo
+COPY go.* .
+
+# ## baixa as dependencias
+RUN go mod download
+
+
+## Maquina para excutar o ambiente de desenvolvimento
+FROM environment-go-dependences AS environment-go
+
+## Labels
+LABEL description="environment-go"
+
+## Configurando variáveis de Ambiente
+ENV APP_HOME /go/src
+ENV GOPORT=9000
+
+# ## diretorio de trabalho
+WORKDIR "$APP_HOME"
+
+# ## copia a aplicacao para dentro da maquina
+COPY ./ ./
+
+## portas de acesso
+EXPOSE "$GOPORT"
+
+# ## cria volume para diretorio padrao
+VOLUME "$APP_HOME"
+
+# ## Executa a aplicacao
+CMD ["gin", "-i", "run"]
