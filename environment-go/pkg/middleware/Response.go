@@ -10,8 +10,6 @@ func (r *Response) Result(c *fiber.Ctx, status int, data any) error {
 }
 
 func (r *Response) Error(c *fiber.Ctx, status int, code string, message string) error {
-	logger := Logger()
-	logger.Error("Code: " + code + " - Message: " + message)
 	return c.Status(status).JSON(map[string]string{
 		"code":    code,
 		"message": message,
@@ -19,7 +17,5 @@ func (r *Response) Error(c *fiber.Ctx, status int, code string, message string) 
 }
 
 func (r *Response) ErrorDefault(c *fiber.Ctx, code string) error {
-	logger := Logger()
-	logger.Error("Code: " + code)
 	return r.Error(c, 500, code, "Serviço indisponível no momento. Tente novamente mais tarde.")
 }

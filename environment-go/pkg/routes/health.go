@@ -13,6 +13,9 @@ func health(c *fiber.Ctx) error {
 	now := time.Now().UTC()
 	result := fmt.Sprintf("UP: %s", now.Format("2006-01-02 15:04:05"))
 
+	logger := middleware.Logger()
+	logger.Info("teste")
+
 	response := middleware.Response{}
 	return response.Result(c, 200, result)
 }
