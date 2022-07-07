@@ -2,11 +2,10 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/lucasfrct/environment-go/pkg/middleware"
+	"github.com/lucasfrct/environment-go/pkg/utils"
 )
 
-func notFound(c *fiber.Ctx) error {
+func notFound(ctx *fiber.Ctx) error {
 
-	response := middleware.Response{}
-	return response.Error(c, 404, "XXX000", "Recurso não encontrado.")
+	return utils.Response(ctx).Json(utils.Error(404, "XXX000", "Recurso não encontrado."))
 }

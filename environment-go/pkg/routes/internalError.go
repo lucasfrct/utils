@@ -2,11 +2,10 @@ package routes
 
 import (
 	"github.com/gofiber/fiber/v2"
-	"github.com/lucasfrct/environment-go/pkg/middleware"
+	"github.com/lucasfrct/environment-go/pkg/utils"
 )
 
-func internalError(c *fiber.Ctx) error {
+func internalError(ctx *fiber.Ctx) error {
 
-	response := middleware.Response{}
-	return response.ErrorDefault(c, "XXX000")
+	return utils.Response(ctx).Json(utils.ErrorDefault("XXX000"))
 }
