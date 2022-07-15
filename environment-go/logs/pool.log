@@ -1,0 +1,43 @@
+{"level":"log","time":"2022-07-03 01:00:24.2286103 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:01:18.1937382 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:02:14.5723188 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:06:05.2474135 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:07:09.6078526 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:07:34.290872 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:07:56.6031299 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:18:53.4503385 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:18:58.9351537 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:23:43.2042958 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:24:25.3390481 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:24:31.9799851 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:27:25.0496148 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:27:57.4755085 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:28:30.389529 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:42:58.0380239 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:43:41.6372747 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:51:41.4213518 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:52:44.8699406 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:53:15.4300808 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:56:03.263511 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:56:08.833481 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:56:52.7534687 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:57:27.9822859 +0000 UTC","caller":"/go/src/pkg/routes/routes.go:14","message":"REQUEST"}
+{"level":"log","time":"2022-07-03 01:57:27.9976119 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 01:57:59.8473741 +0000 UTC","caller":"/go/src/pkg/routes/routes.go:14","message":"REQUEST"}
+{"level":"log","time":"2022-07-03 01:57:59.8633708 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 02:01:58.1079176 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 02:03:14.7079328 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 02:03:20.9893702 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"log","time":"2022-07-03 02:09:54.5800269 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"info","time":"2022-07-03 02:10:36.1713601 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INGO COM ERROR"}
+{"level":"info","time":"2022-07-04 21:50:13.3865856 +0000 UTC","caller":"/go/src/pkg/routes/health.go:19","message":"INFO HEALTH"}
+{"level":"info","time":"2022-07-04 21:51:07.2810091 +0000 UTC","caller":"/go/src/pkg/routes/health.go:20","message":"INFO HEALTH"}
+{"level":"info","time":"2022-07-04 22:04:41.1311996 +0000 UTC","caller":"/go/src/pkg/routes/health.go:19","message":"INFO HEALTH"}
+{"level":"info","time":"2022-07-05 01:57:33.2672957 +0000 UTC","caller":"/go/src/pkg/routes/health.go:18","message":"INFO HEALTH"}
+{"level":"error","time":"2022-07-06 00:52:57.1871091 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:24","message":"JWT inválido"}
+{"level":"error","time":"2022-07-06 00:53:37.702167 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:24","message":"JWT inválido para essa requisição"}
+{"level":"error","time":"2022-07-06 01:40:32.3734134 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:23","message":"JWT inválido para essa requisição"}
+{"level":"error","time":"2022-07-06 01:41:50.8223927 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:23","message":"JWT inválido para essa requisição"}
+{"level":"error","time":"2022-07-06 01:43:58.3923938 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:23","message":"JWT inválido para essa requisição"}
+{"level":"error","time":"2022-07-06 01:44:08.5025785 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:23","message":"JWT inválido para essa requisição"}
+{"level":"error","time":"2022-07-07 09:26:25.6111309 +0000 UTC","caller":"/go/src/pkg/middlewares/JWT.go:23","message":"JWT inválido para essa requisição"}

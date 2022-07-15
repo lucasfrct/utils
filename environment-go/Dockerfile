@@ -2,7 +2,7 @@
 # ## GO lang com live-reload para desenvolvimento
 
 # ## Maquina para almazenasr as dependencias 
-FROM golang:1.18 AS environment-go-dependences
+FROM golang:1.18.3 AS environment-go-dependences
 
 # ## install gin live reload
 RUN go install github.com/codegangsta/gin@latest
